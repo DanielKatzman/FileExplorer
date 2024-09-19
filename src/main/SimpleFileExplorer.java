@@ -44,6 +44,6 @@ public class SimpleFileExplorer {
     }
 
     private static void spaceMaker(){
-        System.out.print(" ".repeat(insideLoop)); //instead of a for loop,improved with repeat
+        System.out.print(" ".repeat(insideLoop)); //instead of a for loop,improved with repeat.
     }
 }
