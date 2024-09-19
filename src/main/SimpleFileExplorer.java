@@ -3,8 +3,8 @@ package main;
 import java.io.File;
 
 public class SimpleFileExplorer {
-    private static final char arrowIn = '\u21B3';
-    private static final char arrowOut = '\u21B2';
+    private static final char arrowIn = '↳';
+    private static final char arrowOut = '↲';
     private static int insideLoop = 0;
     private final static String mainFilePath = "C:\\Users\\danka\\OneDrive - Afeka College Of Engineering\\Self learning";
     public static void main(String[] args) {
