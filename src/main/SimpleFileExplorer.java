@@ -26,7 +26,7 @@ public class SimpleFileExplorer {
                 System.out.print(arrowIn);
                 System.out.println();
                 insideLoop++;
-                showAllFiles(new File(filePath.getAbsolutePath() + File.separator + file.getName()));
+                showAllFiles(file); // instead of construction the whole file path and creating a new File, i can just take the file from the loop.
                 insideLoop--;
                 spaceMaker();
                 System.out.print(arrowOut);
