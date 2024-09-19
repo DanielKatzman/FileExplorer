@@ -31,7 +31,7 @@ public class SimpleFileExplorer {
                 spaceMaker();
                 System.out.print(arrowOut);
                 System.out.println();
-            }else if(file.isFile()){
+            }else { //no need to check for isFile() because file directory can distinguish only between directories and files.
                 for (int i = 0; i < insideLoop + 1;i++) {
                     System.out.print(" ");
                 }
