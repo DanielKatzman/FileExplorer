@@ -1,6 +1,6 @@
 package main;
 
-import java.io.Console;
+import io.Gui;
 
 public class Application {
     public static void main(String[] args) {

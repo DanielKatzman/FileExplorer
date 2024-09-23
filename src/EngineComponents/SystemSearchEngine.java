@@ -1,18 +1,16 @@
-package main;
+package EngineComponents;
 
 import exceptions.FilesIsEmpty;
+import io.Gui;
 
 import java.io.File;
 
 public class SystemSearchEngine {
-    private static final char arrowIn = '↳';
-    private static final char arrowOut = '↲';
     private static int insideLoop = 0;
     private static int depth;
     private static String mainFilePath;
-    private static boolean exit = false;
     private File currentFile;
-    private static String currentFilePath; //todo fix so i wouldn't need a static String!!!
+
 
     public SystemSearchEngine(int depth,String startingLocation) throws FilesIsEmpty {
         this.depth = depth;
@@ -48,34 +46,5 @@ public class SystemSearchEngine {
         }
         Gui.printNoFiles(insideLoop);
 
-    }
-
-    public static String fileLocationToString(File file) throws FilesIsEmpty {
-        File[] files = file.listFiles();
-
-        if (files == null) {
-            throw new FilesIsEmpty();
-        }
-
-        for (File currentFile : files) {
-            if(exit){
-                break;
-            }
-            if (currentFile.isDirectory()) {
-                Gui.printDirectory(insideLoop, currentFile);
-                Gui.fileLocationQuestion();
-                switch (Input.readInt()){
-                    case 1:
-                        exit = true;
-                         currentFilePath = currentFile.getAbsolutePath();
-                         break;
-                    case 2:
-                        fileLocationToString(currentFile);
-                    default:
-                        continue;
-                }
-            }
-        }
-        return currentFilePath;
     }
 }
