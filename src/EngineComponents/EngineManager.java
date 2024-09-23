@@ -10,31 +10,36 @@ import java.util.Optional;
 public class EngineManager {
     SystemSearchEngine searchEngine;
 
-    private String getFileLocation(){
+    public Optional<File> fileExplorer(){
         Gui.fileLocationMessage();
         try {
-            FileLocationToString fileLocationToString = new FileLocationToString();
-            Optional<String> filePath = fileLocationToString.initiate();
+            FileExplorer fileLocationToString = new FileExplorer();
+            Optional<File> file = fileLocationToString.initiate();
 
-            if(filePath.isPresent()){
-                return filePath.get();
+            if(file.isPresent()){
+                return file;
+            }else {
+                throw new FilesIsEmpty();
             }
 
         }catch (FilesIsEmpty e){
             System.out.println(e.getMessage());
+        }catch (NullPointerException e){
+            System.out.println("Error");
         }
 
-        return null;
+        return Optional.empty();
     }
 
     public void showAllFiles(){
         try{
-            String filePath = getFileLocation();
+            Optional<File> file = fileExplorer();
+            if(file.isPresent()){
+                Gui.searchDepthMessage();
+                int depth = Input.readInt();
 
-            Gui.searchDepthMessage();
-            int depth = Input.readInt();
-
-            new SystemSearchEngine(depth,filePath);
+                new SystemSearchEngine(depth,file.get().getAbsolutePath());
+            }
         }catch (FilesIsEmpty e){
             System.out.println(e.getMessage());
         }

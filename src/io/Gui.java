@@ -19,6 +19,8 @@ public class Gui {
             switch (Input.readInt()){
                 case 1:
                     option1();
+                case 2:
+                    option2();
                 case 0:
                     option0();
             }
@@ -28,6 +30,7 @@ public class Gui {
     private static void menu(){
         System.out.println("-------------File Explorer-------------");
         System.out.println("1. Show all files");
+        System.out.println("2. File Explorer");
         System.out.println("0. Exit Program");
     }
 
@@ -63,8 +66,8 @@ public class Gui {
         System.out.println("No more files found");
     }
 
-    public static void fileLocationQuestion(){
-        System.out.println("press 1 to select folder, press 2 to enter folder , press 0 to exit");
+    public static void FileExplorerMenu(){
+        System.out.println("1: select folder 2: enter folder 3: return 0: exit");
     }
 
     public static void printDirectoryDetails(File[] files){
@@ -93,11 +96,35 @@ public class Gui {
         System.out.printf("Selected: %-20s %n",directory.getName());
     }
 
+    public static void backToTopDirectoryMessage(){
+        System.out.println("This is the top Directory!");
+    }
+
+    public static void emptyDirectoryMessage(){
+        System.out.println("This Directory is empty!");
+    }
+
+    public static void selectSystemDisk(File[] diskNames){
+        int counter = 0;
+        for(File file : diskNames){
+            System.out.printf("Select System Disk: %n %-2d %-20s %n",counter++,file.getAbsoluteFile());
+        }
+    }
+
+    public static void incorrectInputMessage(){
+        System.out.println("Please enter a valid input");
+    }
+
     ////////////////////////////////////////options///////////////////////////////////////////////
 
     private static void option1(){
         System.out.println("--------------Option 1 selected---------------");
         engine.showAllFiles();
+    }
+
+    private static void option2(){
+        System.out.println("--------------Option 2 selected---------------");
+        engine.fileExplorer();
     }
 
     private static void option0(){

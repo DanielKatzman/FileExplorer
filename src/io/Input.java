@@ -35,4 +35,14 @@ public class Input {
         }
         return string;
     }
+
+    public static int correctInput(int range){
+        while(true){
+            int input = readInt();
+            if(input >= 0 && input <= range){
+                return input;
+            }
+            System.out.println("Please enter correct range");
+        }
+    }
 }
