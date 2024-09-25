@@ -3,6 +3,7 @@ package io;
 import EngineComponents.EngineManager;
 
 import java.io.File;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Gui {
@@ -66,7 +67,7 @@ public class Gui {
         System.out.println("No more files found");
     }
 
-    public static void FileExplorerMenu(){
+    public static void fileExplorerMenu(){
         System.out.println("1: select folder 2: enter folder 3: return 0: exit");
     }
 
@@ -84,7 +85,7 @@ public class Gui {
     }
 
     public static void fileLocationMessage(){
-        System.out.println("-------------------file guide----------------------");
+        System.out.println("-------------------file Explorer----------------------");
         System.out.println("------choose a directory to begin the search-------");
     }
 
@@ -124,7 +125,11 @@ public class Gui {
 
     private static void option2(){
         System.out.println("--------------Option 2 selected---------------");
-        engine.fileExplorer();
+        Optional<File> output = engine.fileExplorer();
+
+        if(output.isPresent()){
+            System.out.println(output.get().getName());
+        }else System.out.println("No such file or directory");
     }
 
     private static void option0(){

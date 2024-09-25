@@ -5,14 +5,14 @@ import io.Gui;
 
 import java.io.File;
 
-public class SystemSearchEngine {
+public class ListAllFiles {
     private static int insideLoop = 0;
     private static int depth;
     private static String mainFilePath;
     private File currentFile;
 
 
-    public SystemSearchEngine(int depth,String startingLocation) throws FilesIsEmpty {
+    public ListAllFiles(int depth, String startingLocation) throws FilesIsEmpty {
         this.depth = depth;
         mainFilePath = startingLocation;
         currentFile = new File(mainFilePath);

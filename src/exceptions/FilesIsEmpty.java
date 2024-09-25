@@ -1,7 +1,7 @@
 package exceptions;
 
-public class FilesIsEmpty extends Exception {
+public class FilesIsEmpty extends FilesExceptions {
     public FilesIsEmpty() {
-        System.out.println("Files is empty");
+        super("No more files in directory!");
     }
 }

@@ -33,7 +33,7 @@ public class FileExplorer {
         int selectedFile = Input.readInt();
         Gui.selectedDirectoyMessage(files[selectedFile]);
 
-        Gui.FileExplorerMenu();
+        Gui.fileExplorerMenu();
         int fileOptions = Input.readInt();
 
         switch (fileOptions) {
