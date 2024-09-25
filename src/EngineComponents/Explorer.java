@@ -9,7 +9,7 @@ import java.io.File;
 import java.util.Optional;
 
 public abstract class Explorer {
-    protected static File currentFile;
+    protected static File currentDirectory;
     protected static int insideLoop = 0;
     protected int depth;
 
@@ -18,29 +18,35 @@ public abstract class Explorer {
     }
 
     protected Optional<File> explorer(File folder){
-        currentFile = folder;
-        File[] files = currentFile.listFiles();
+        currentDirectory = folder;
+        File[] files = folder.listFiles();
 
         if(files == null) handleNoAccess();
 
-        if(files.length == 0) handleNoMoreFiles(currentFile);
+        if(files.length == 0) handleNoMoreFiles(currentDirectory);
 
-        if(depth == insideLoop && depth != 0) handleMaxDepth(currentFile);
+        if(depth == insideLoop && depth != 0) handleMaxDepth();
 
         insideLoop++;
+
         for (File file : files) {
             if (file.isDirectory()) {
-                handleDirectory(currentFile);
-                return handleReturn(currentFile);
-            }else handleFile(currentFile);
+               handleDirectory(currentDirectory);
+
+                Optional<File> result = handleReturn(file);
+                if (result.isPresent()) {
+                    insideLoop--;
+                    return result;
+                }
+            }else handleFile(file);
         }
         insideLoop--;
-        return handleNoMoreFiles(currentFile);
+        return handleNoMoreFiles(currentDirectory);
     }
 
     protected abstract Optional<File> handleNoMoreFiles(File currentFile);
     protected abstract void handleDirectory(File currentFile);
-    protected void handleMaxDepth(File currentFile){}
+    protected Optional<File> handleMaxDepth(){return Optional.empty();}
     protected void handleFile(File currentFile){}
     protected abstract Optional<File> handleReturn(File currentFile);
     public abstract Optional<File> handleNoAccess();

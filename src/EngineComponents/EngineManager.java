@@ -19,9 +19,15 @@ public class EngineManager {
     }
 
     public void showAllFiles(){
-        //File startingDirectory = fileExplorer().get(); //todo add to gui not here
-        int depth = Input.readInt();
-        ListAllFiles_2_0 allFiles = new ListAllFiles_2_0(depth, new File("C:\\Program Files"));
+        Optional<File> file = fileExplorer();
+        if(file.isPresent()){
+            File output = file.get();
+            System.out.println("Enter search depth");
+            int depth = Input.readInt();
+            ListAllFiles_2_0 allFiles = new ListAllFiles_2_0(depth, output.getAbsoluteFile());
+            allFiles.initiate();
+        }else System.out.println("no file selected!");
+
     }
 
 }

@@ -20,10 +20,13 @@ public class Gui {
             switch (Input.readInt()){
                 case 1:
                     option1();
+                    break;
                 case 2:
                     option2();
+                    break;
                 case 0:
                     option0();
+                    break;
             }
         }
     }

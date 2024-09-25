@@ -7,7 +7,6 @@ import java.io.File;
 import java.util.Optional;
 
 public class ListAllFiles_2_0 extends Explorer{
-    private File currentDirectory;
     public ListAllFiles_2_0(int depth,File startFile) {
         super(depth);
         currentDirectory = startFile;
@@ -19,43 +18,34 @@ public class ListAllFiles_2_0 extends Explorer{
 
     @Override
     protected Optional<File> handleNoMoreFiles(File currentFile) {
-        Gui.printNoFiles(insideLoop);
-        Gui.printArrow(insideLoop,false);
+        // No more files or directories in this folder
         return Optional.empty();
     }
 
     @Override
     protected void handleDirectory(File currentFile) {
+        // Print the directory details
+        Gui.printDirectory(insideLoop, currentFile);  // Assuming Gui prints the directory name/structure
         Gui.printArrow(insideLoop,true);
-        Gui.printDirectory(insideLoop,currentFile);
+    }
+
+    @Override
+    protected void handleFile(File currentFile) {
+        // Print the file details
+        Gui.printFile(insideLoop, currentFile);  // Assuming Gui prints the file name/structure
     }
 
     @Override
     protected Optional<File> handleReturn(File currentFile) {
-        // Get all directories in the current folder
-        File[] directories = currentFile.listFiles(File::isDirectory);
-
-        if (directories == null || directories.length == 0) {
-            return Optional.empty();  // No subdirectories or access issue
-        }
-
-        // Recursively explore each subdirectory
-        for (File directory : directories) {
-            explorer(directory);  // Explore each directory recursively
-        }
-
-        // Once all directories have been explored, return empty
+        explorer(currentFile);
+        Gui.printArrow(insideLoop,false);
         return Optional.empty();
     }
 
     @Override
     public Optional<File> handleNoAccess() {
-        Gui.printNoFiles(insideLoop);
+        // Handle when a directory cannot be accessed
+        Gui.emptyDirectoryMessage();  // Assuming Gui prints a message about access denial
         return Optional.empty();
-    }
-
-    @Override
-    protected void handleFile(File currentFile) {
-        Gui.printFile(insideLoop,currentFile);
     }
 }
