@@ -104,8 +104,9 @@ public class Gui {
         System.out.println("This is the top Directory!");
     }
 
-    public static void emptyDirectoryMessage(){
-        System.out.println("This Directory is empty!");
+    public static void emptyDirectoryMessage(int insideLoop){
+        printSpaces(insideLoop);
+        System.out.print("This Directory is empty!\n");
     }
 
     public static void selectSystemDisk(File[] diskNames){
