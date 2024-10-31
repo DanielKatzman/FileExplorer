@@ -17,10 +17,10 @@ public class ListAllFiles_2_0 extends Explorer{
     @Override
     protected Optional<File> loop(File currentFile) {
 
-        if(currentDirectory == null) {
+        if(currentFile == null) {
             handleNoAccess();
         }
-        if(currentDirectory.listFiles().length == 0) { //todo check if the length is the real length of the inside folders!!
+        if(currentFile.listFiles().length == 0 || currentFile.listFiles() == null) { //todo check if the length is the real length of the inside folders!!
             handleEmptyDirectory(currentDirectory);
         }
 

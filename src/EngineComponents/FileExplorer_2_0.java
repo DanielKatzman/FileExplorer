@@ -26,7 +26,7 @@ public class FileExplorer_2_0 extends Explorer{
     protected Optional<File> loop(File currentFile) {
         handleDirectory(currentFile);
         handleReturn(currentFile);
-        return Optional.of(currentFile);
+        return Optional.of(currentDirectory);
     }
 
     @Override
