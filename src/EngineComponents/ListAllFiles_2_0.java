@@ -1,7 +1,6 @@
 package EngineComponents;
 
 import io.Gui;
-import io.Input;
 
 import java.io.File;
 import java.util.Optional;
@@ -13,12 +12,42 @@ public class ListAllFiles_2_0 extends Explorer{
     }
 
     public void initiate(){
-        explorer(currentDirectory);
+        loop(currentDirectory);
+    }
+    @Override
+    protected Optional<File> loop(File currentFile) {
+
+        if(currentDirectory == null) {
+            handleNoAccess();
+        }
+        if(currentDirectory.listFiles().length == 0) { //todo check if the length is the real length of the inside folders!!
+            handleEmptyDirectory(currentDirectory);
+        }
+
+        if(depth == insideLoop && depth != 0){
+            handleMaxDepth();
+        }
+        insideLoop++;
+        for(File files : currentDirectory.listFiles()){
+            if(files.isDirectory()){
+                handleDirectory(files); //prints folder name
+                handleReturn(files);
+            }else {
+                handleFile(files); //prints file name
+            }
+        }
+        insideLoop--;
+        return Optional.empty();
     }
 
+    //    public void initiate(){
+//        explorer(currentDirectory);
+//    }
+
     @Override
-    protected Optional<File> handleNoMoreFiles(File currentFile) {
+    protected Optional<File> handleEmptyDirectory(File currentFile) {
         // No more files or directories in this folder
+        Gui.emptyDirectoryMessage(insideLoop);
         return Optional.empty();
     }
 
@@ -37,7 +66,8 @@ public class ListAllFiles_2_0 extends Explorer{
 
     @Override
     protected Optional<File> handleReturn(File currentFile) {
-        explorer(currentFile);
+        currentDirectory = currentFile;
+        loop(currentDirectory);
         Gui.printArrow(insideLoop,false);
         return Optional.empty();
     }
@@ -45,7 +75,7 @@ public class ListAllFiles_2_0 extends Explorer{
     @Override
     public Optional<File> handleNoAccess() {
         // Handle when a directory cannot be accessed
-        Gui.emptyDirectoryMessage();  // Assuming Gui prints a message about access denial
+        Gui.emptyDirectoryMessage(insideLoop);  // Assuming Gui prints a message about access denial
         return Optional.empty();
     }
 }
