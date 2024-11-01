@@ -12,32 +12,6 @@ public abstract class Explorer {
         this.depth = depth;
     }
 
-//    protected Optional<File> explorer(File folder){
-//        currentDirectory = folder;
-//        File[] files = folder.listFiles();
-//
-//        if(files == null) handleNoAccess();
-//
-//        if(files.length == 0) handleNoMoreFiles(currentDirectory);
-//
-//        if(depth == insideLoop && depth != 0) handleMaxDepth();
-//
-//        insideLoop++;
-//
-//        for (File file : files) {
-//            if (file.isDirectory()) {
-//               handleDirectory(currentDirectory);
-//
-//                Optional<File> result = handleReturn(file);
-//                if (result.isPresent()) {
-//                    insideLoop--;
-//                    return result;
-//                }
-//            }else handleFile(file);
-//        }
-//        insideLoop--;
-//        return handleNoMoreFiles(currentDirectory);
-//    }
 
     protected abstract Optional<File> loop(File currentFile);
     protected abstract Optional<File> handleEmptyDirectory(File currentFile);

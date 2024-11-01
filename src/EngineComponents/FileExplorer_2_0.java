@@ -6,7 +6,6 @@ import java.io.File;
 import java.util.Optional;
 
 public class FileExplorer_2_0 extends Explorer{
-//    private File chosenFile;
 
     public FileExplorer_2_0(){
         super(0); //no limit on depth!

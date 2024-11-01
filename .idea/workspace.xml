@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="603f130e-855a-4b38-8428-b5922d7242de" name="Changes" comment="fixed a few bugs that caused the file explorer return incorrect file" />
+    <list default="true" id="603f130e-855a-4b38-8428-b5922d7242de" name="Changes" comment="0.3.2 cleaner explorer class more abstruct, fixed multiple bugs!">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EngineComponents/Explorer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EngineComponents/Explorer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EngineComponents/FileExplorer_2_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EngineComponents/FileExplorer_2_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EngineComponents/ListAllFiles_2_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EngineComponents/ListAllFiles_2_0.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -46,24 +51,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Application.executor": "Run",
-    "Application.Main.executor": "Run",
-    "Application.Test.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "testbeforepush",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Application.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Test.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\danka\IdeaProjects\SimpleFileExplorer\src" />
@@ -92,8 +97,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
       </set>
     </attachedChunks>
   </component>
@@ -107,6 +112,8 @@
       <updated>1728845822770</updated>
       <workItem from="1728845824161" duration="217000" />
       <workItem from="1730392736928" duration="6637000" />
+      <workItem from="1730400886684" duration="1210000" />
+      <workItem from="1730448071913" duration="3099000" />
     </task>
     <task id="LOCAL‎-00001" summary="simplified the explorer class to be more abstruct.&#10;made the listallfiles2.0 correspond to the explorer change!">
       <option name="closed" value="true" />
@@ -132,7 +139,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1730399359389</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL‎-00004" summary="0.3.2 cleaner explorer class more abstruct, fixed multiple bugs!">
+      <option name="closed" value="true" />
+      <created>1730400651122</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL‎-00004" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1730400651122</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -149,7 +164,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="testbeforepush" />
+                        <option value="master" />
                       </list>
                     </value>
                   </entry>
@@ -165,17 +180,7 @@
     <MESSAGE value="simplified the explorer class to be more abstruct.&#10;made the listallfiles2.0 correspond to the explorer change!" />
     <MESSAGE value="changed the file explorer class 2.0 to match the explorer class!" />
     <MESSAGE value="fixed a few bugs that caused the file explorer return incorrect file" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed a few bugs that caused the file explorer return incorrect file" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/EngineComponents/FileExplorer_2_0.java</url>
-          <line>40</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="0.3.2 cleaner explorer class more abstruct, fixed multiple bugs!" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.3.2 cleaner explorer class more abstruct, fixed multiple bugs!" />
   </component>
 </project>

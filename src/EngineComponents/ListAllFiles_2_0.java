@@ -3,6 +3,7 @@ package EngineComponents;
 import io.Gui;
 
 import java.io.File;
+import java.util.Objects;
 import java.util.Optional;
 
 public class ListAllFiles_2_0 extends Explorer{
@@ -14,21 +15,29 @@ public class ListAllFiles_2_0 extends Explorer{
     public void initiate(){
         loop(currentDirectory);
     }
+
     @Override
     protected Optional<File> loop(File currentFile) {
+        if(!currentFile.isDirectory()) {
+            return Optional.empty();
+        }
 
-        if(currentFile == null) {
+        File[] subDirectories = currentFile.listFiles();
+
+        if(subDirectories == null) {
             handleNoAccess();
         }
-        if(currentFile.listFiles().length == 0 || currentFile.listFiles() == null) { //todo check if the length is the real length of the inside folders!!
+
+        if(subDirectories.length == 0) {
             handleEmptyDirectory(currentDirectory);
         }
 
         if(depth == insideLoop && depth != 0){
             handleMaxDepth();
         }
+
         insideLoop++;
-        for(File files : currentDirectory.listFiles()){
+        for(File files : subDirectories) {
             if(files.isDirectory()){
                 handleDirectory(files); //prints folder name
                 handleReturn(files);
@@ -39,10 +48,6 @@ public class ListAllFiles_2_0 extends Explorer{
         insideLoop--;
         return Optional.empty();
     }
-
-    //    public void initiate(){
-//        explorer(currentDirectory);
-//    }
 
     @Override
     protected Optional<File> handleEmptyDirectory(File currentFile) {
@@ -66,8 +71,7 @@ public class ListAllFiles_2_0 extends Explorer{
 
     @Override
     protected Optional<File> handleReturn(File currentFile) {
-        currentDirectory = currentFile;
-        loop(currentDirectory);
+        loop(currentFile);
         Gui.printArrow(insideLoop,false);
         return Optional.empty();
     }
