@@ -1,15 +1,9 @@
 package EngineComponents;
 
-import exceptions.FilesExceptions;
-import exceptions.FilesIsEmpty;
-import exceptions.NoAccess;
 import io.FileWriterToText;
 import io.Gui;
 import io.Input;
-
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Optional;
 

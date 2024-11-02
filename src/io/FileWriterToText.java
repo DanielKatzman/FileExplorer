@@ -9,10 +9,9 @@ public class FileWriterToText {
     private static final char arrowIn = '↳';
     private static final char arrowOut = '↲';
     private static BufferedWriter writer;
-    private static File file;
 
     public FileWriterToText() throws IOException {
-        file = new File("testing.txt");
+        File file = new File("testing.txt");
         writer = new BufferedWriter(new FileWriter(file));
     }
 
