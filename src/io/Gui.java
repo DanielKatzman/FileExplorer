@@ -24,6 +24,9 @@ public class Gui {
                 case 2:
                     option2();
                     break;
+                case 3:
+                    option3();
+                    break;
                 case 0:
                     option0();
                     break;
@@ -31,14 +34,16 @@ public class Gui {
         }
     }
 
+
     private static void menu(){
         System.out.println("-------------File Explorer-------------");
         System.out.println("1. Show all files");
         System.out.println("2. File Explorer");
+        System.out.println("3. Write To Text");
         System.out.println("0. Exit Program");
     }
 
-    public static void printSpaces(int insideLoop){
+    private static void printSpaces(int insideLoop){
         System.out.print(" ".repeat(insideLoop));
     }
 
@@ -134,6 +139,11 @@ public class Gui {
         if(output.isPresent()){
             System.out.println(output.get().getName());
         }else System.out.println("No such file or directory");
+    }
+
+    private static void option3() {
+        System.out.println("--------------Option 3 selected---------------");
+        engine.writeToText();
     }
 
     private static void option0(){

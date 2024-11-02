@@ -1,6 +1,7 @@
 package EngineComponents;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Optional;
 
 public abstract class Explorer {
@@ -13,12 +14,12 @@ public abstract class Explorer {
     }
 
 
-    protected abstract Optional<File> loop(File currentFile);
-    protected abstract Optional<File> handleEmptyDirectory(File currentFile);
-    protected abstract void handleDirectory(File currentFile);
+    protected abstract Optional<File> loop(File currentFile) throws IOException;
+    protected abstract Optional<File> handleEmptyDirectory(File currentFile) throws IOException;
+    protected abstract void handleDirectory(File currentFile) throws IOException;
     protected Optional<File> handleMaxDepth(){return Optional.empty();}
-    protected void handleFile(File currentFile){}
-    protected abstract Optional<File> handleReturn(File currentFile);
+    protected void handleFile(File currentFile) throws IOException {}
+    protected abstract Optional<File> handleReturn(File currentFile) throws IOException;
     public abstract Optional<File> handleNoAccess();
 
 }
