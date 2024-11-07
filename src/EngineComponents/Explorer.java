@@ -20,6 +20,6 @@ public abstract class Explorer {
     protected Optional<File> handleMaxDepth(){return Optional.empty();}
     protected void handleFile(File currentFile) throws IOException {}
     protected abstract Optional<File> handleReturn(File currentFile) throws IOException;
-    public abstract Optional<File> handleNoAccess();
+    public abstract Optional<File> handleNoAccess() throws IOException;
 
 }

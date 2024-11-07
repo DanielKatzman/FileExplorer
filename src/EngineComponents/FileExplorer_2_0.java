@@ -3,6 +3,9 @@ package EngineComponents;
 import io.Gui;
 import io.Input;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.Arrays;
 import java.util.Optional;
 
 public class FileExplorer_2_0 extends Explorer{
@@ -13,7 +16,7 @@ public class FileExplorer_2_0 extends Explorer{
 
 
 
-    public Optional<File> initiate(){
+    public Optional<File> initiate() throws IOException {
         File[] files = File.listRoots();
         Gui.selectSystemDisk(files);
         int input = Input.correctInput(files.length - 1);
@@ -22,20 +25,20 @@ public class FileExplorer_2_0 extends Explorer{
     }
 
     @Override
-    protected Optional<File> loop(File currentFile) {
+    protected Optional<File> loop(File currentFile) throws IOException {
         handleDirectory(currentFile);
         handleReturn(currentFile);
         return Optional.of(currentDirectory);
     }
 
     @Override
-    protected Optional<File> handleEmptyDirectory(File currentFile){
-        System.out.printf("No more files in Directory! returning to Directory: %s %n", currentDirectory.getParentFile().getName());
+    protected Optional<File> handleEmptyDirectory(File currentFile) throws IOException {
+        System.out.printf("No more Directories! returning to Directory: %s %n", currentDirectory.getParentFile().getName());
         return loop(currentFile.getParentFile());
     }
 
     @Override
-    protected Optional<File> handleReturn(File currentFile){
+    protected Optional<File> handleReturn(File currentFile) throws IOException {
 
         Gui.fileExplorerMenu();
 
@@ -53,17 +56,34 @@ public class FileExplorer_2_0 extends Explorer{
         };
     }
 
-    public Optional<File> handleNoAccess(){
+    public Optional<File> handleNoAccess() throws IOException {
         System.out.printf("No access to current directory! returning to Directory: %s %n", currentDirectory.getParentFile().getName());
         return loop(currentDirectory.getParentFile());
     }
 
-    protected void handleDirectory(File currentFile){
-        File[] files = currentFile.listFiles(File::isDirectory);
-        Gui.printDirectoryDetails(files);
-        Gui.chooseFileFromList();
-        int inputFile = Input.correctInput(files.length - 1);
-        currentDirectory = files[inputFile];
-        Gui.selectedDirectoyMessage(currentDirectory);
+    protected void handleDirectory(File currentFile) throws IOException {
+        if(currentFile.exists() && currentFile.isDirectory()) {
+            File[] files = currentFile.listFiles();
+            File[] filteredFiles = Arrays.stream(files)
+                    .filter(File::isDirectory)
+                    .filter(File::canRead)
+                    .filter(file -> !file.isHidden())
+                    .filter(File::isAbsolute)
+                    .toArray(File[]::new);
+
+            if(filteredFiles.length == 0){
+                handleEmptyDirectory(currentFile);
+            }
+
+            Gui.printDirectoryDetails(filteredFiles);
+            Gui.chooseFileFromList();
+            int inputFile = Input.correctInput(filteredFiles.length - 1);
+            currentDirectory = filteredFiles[inputFile];
+            Gui.selectedDirectoyMessage(currentDirectory);
+        }
+        else {
+            handleNoAccess();
+        }
+
     }
 }

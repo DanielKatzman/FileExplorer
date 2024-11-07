@@ -3,6 +3,8 @@ package io;
 import EngineComponents.EngineManager;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -82,9 +84,7 @@ public class Gui {
     public static void printDirectoryDetails(File[] files){
         int counter = 0;
         for(File file : files){
-            if(file.isDirectory()){
-                System.out.printf("%-3d Directory: %-30s | Size: %-10.1f %n",counter++,file.getName(),(float)file.length());
-            }
+            System.out.printf("%-3d Directory: %-30s | Size: %-10.1f %n",counter++,file.getName(),(float)file.length());
         }
     }
 

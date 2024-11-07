@@ -3,6 +3,7 @@ package EngineComponents;
 import io.FileWriterToText;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Optional;
 
 public class ListAllFilesToText extends Explorer{
@@ -18,6 +19,7 @@ public class ListAllFilesToText extends Explorer{
     @Override
     protected Optional<File> loop(File currentFile) throws IOException {
         if(!currentFile.isDirectory()) {
+            System.out.println("File not accesible!");
             return Optional.empty();
         }
 

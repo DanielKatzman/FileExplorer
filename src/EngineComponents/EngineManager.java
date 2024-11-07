@@ -5,6 +5,7 @@ import io.Gui;
 import io.Input;
 import java.io.File;
 import java.io.IOException;
+import java.io.Writer;
 import java.util.Optional;
 
 public class EngineManager {
@@ -12,8 +13,13 @@ public class EngineManager {
     public Optional<File> fileExplorer(){
         Gui.fileLocationMessage();
         FileExplorer_2_0 fileExplorer = new FileExplorer_2_0();
+        try {
+            return fileExplorer.initiate();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
 
-        return fileExplorer.initiate();
+        return Optional.empty();
     }
 
     public void showAllFiles(){
@@ -38,6 +44,7 @@ public class EngineManager {
                 FileWriterToText ft = new FileWriterToText();
                 ListAllFilesToText allFiles = new ListAllFilesToText(depth, output.getAbsoluteFile());
                 allFiles.initialise();
+                FileWriterToText.writerClose();
             }else System.out.println("no file selected!");
 
         } catch (IOException e) {

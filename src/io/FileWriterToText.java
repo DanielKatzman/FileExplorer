@@ -12,7 +12,7 @@ public class FileWriterToText {
 
     public FileWriterToText() throws IOException {
         File file = new File("testing.txt");
-        writer = new BufferedWriter(new FileWriter(file));
+        writer = new BufferedWriter(new FileWriter(file,false));
     }
 
     public static void printArrow(int insideLoop, boolean arrowDirection) throws IOException {
@@ -48,5 +48,9 @@ public class FileWriterToText {
         printSpaces(insideLoop);
         writer.write("No more files found\n");
         writer.flush();
+    }
+
+    public static void writerClose() throws IOException {
+        writer.close();
     }
 }
