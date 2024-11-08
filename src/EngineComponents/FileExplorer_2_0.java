@@ -9,6 +9,8 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public class FileExplorer_2_0 extends Explorer{
+    static int inputChoice;
+    static File subDirectory;
 
     public FileExplorer_2_0(){
         super(0); //no limit on depth!
@@ -39,10 +41,11 @@ public class FileExplorer_2_0 extends Explorer{
 
     @Override
     protected Optional<File> handleReturn(File currentFile) throws IOException {
+        subDirectory = currentFile;
 
         Gui.fileExplorerMenu();
 
-        int inputChoice = Input.readInt();
+        inputChoice = Input.readInt();
 
         return switch (inputChoice) {
             case 0 -> Optional.empty(); //Exit statement
@@ -63,6 +66,13 @@ public class FileExplorer_2_0 extends Explorer{
 
     protected void handleDirectory(File currentFile) throws IOException {
         try {
+            if(inputChoice == 3 && currentFile.listFiles().length == 0){
+            }
+        }catch (NullPointerException e){
+            handleRoot(currentFile);
+        }
+
+        try {
             if(currentFile.exists()) {
                 File[] files = currentFile.listFiles();
                 File[] filteredFiles = Arrays.stream(files)
@@ -71,7 +81,7 @@ public class FileExplorer_2_0 extends Explorer{
                         .toArray(File[]::new);
 
                 if(filteredFiles.length == 0){
-                    handleEmptyDirectory(currentFile);
+                    handleRoot(currentFile);
                 }
 
                 Gui.printDirectoryDetails(filteredFiles);
@@ -84,4 +94,10 @@ public class FileExplorer_2_0 extends Explorer{
             handleNoAccess();
         }
     }
+
+    protected Optional<File> handleRoot(File currentFile) throws IOException {
+        System.out.print("cannot return current directory is the root directory!\n");
+        return loop(subDirectory);
+    }
+
 }
