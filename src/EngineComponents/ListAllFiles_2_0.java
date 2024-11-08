@@ -17,34 +17,39 @@ public class ListAllFiles_2_0 extends Explorer{
 
     @Override
     protected Optional<File> loop(File currentFile) {
-        if(!currentFile.isDirectory()) {
+        try {
+            if(!currentFile.isDirectory()) {
+                return Optional.empty();
+            }
+
+            File[] subDirectories = currentFile.listFiles();
+
+            if(subDirectories == null) {
+                handleNoAccess();
+            }
+
+            if(subDirectories.length == 0) {
+                handleEmptyDirectory(currentDirectory);
+            }
+
+            if(depth == insideLoop && depth != 0){
+                handleMaxDepth();
+            }
+
+            insideLoop++;
+            for(File files : subDirectories) {
+                if(files.isDirectory()){
+                    handleDirectory(files); //prints folder name
+                    handleReturn(files);
+                }else {
+                    handleFile(files); //prints file name
+                }
+            }
+            insideLoop--;
             return Optional.empty();
-        }
-
-        File[] subDirectories = currentFile.listFiles();
-
-        if(subDirectories == null) {
+        }catch (NullPointerException e){
             handleNoAccess();
         }
-
-        if(subDirectories.length == 0) {
-            handleEmptyDirectory(currentDirectory);
-        }
-
-        if(depth == insideLoop && depth != 0){
-            handleMaxDepth();
-        }
-
-        insideLoop++;
-        for(File files : subDirectories) {
-            if(files.isDirectory()){
-                handleDirectory(files); //prints folder name
-                handleReturn(files);
-            }else {
-                handleFile(files); //prints file name
-            }
-        }
-        insideLoop--;
         return Optional.empty();
     }
 
