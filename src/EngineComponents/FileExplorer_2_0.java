@@ -62,28 +62,28 @@ public class FileExplorer_2_0 extends Explorer{
     }
 
     protected void handleDirectory(File currentFile) throws IOException {
-        if(currentFile.exists()) {
-            File[] files = currentFile.listFiles();
-            File[] filteredFiles = Arrays.stream(files)
-                    .filter(File::isDirectory)
-                    .filter(File::canRead)
-                    .filter(file -> !file.isHidden())
-                    .filter(File::isAbsolute)
-                    .toArray(File[]::new);
+        try {
+            if(currentFile.exists()) {
+                File[] files = currentFile.listFiles();
+                File[] filteredFiles = Arrays.stream(files)
+                        .filter(File::isDirectory)
+                        .filter(File::canRead)
+                        .filter(file -> !file.isHidden())
+                        .filter(File::isAbsolute)
+                        .toArray(File[]::new);
 
-            if(filteredFiles.length == 0){
-                handleEmptyDirectory(currentFile);
+                if(filteredFiles.length == 0){
+                    handleEmptyDirectory(currentFile);
+                }
+
+                Gui.printDirectoryDetails(filteredFiles);
+                Gui.chooseFileFromList();
+                int inputFile = Input.correctInput(filteredFiles.length - 1);
+                currentDirectory = filteredFiles[inputFile];
+                Gui.selectedDirectoyMessage(currentDirectory);
             }
-
-            Gui.printDirectoryDetails(filteredFiles);
-            Gui.chooseFileFromList();
-            int inputFile = Input.correctInput(filteredFiles.length - 1);
-            currentDirectory = filteredFiles[inputFile];
-            Gui.selectedDirectoyMessage(currentDirectory);
-        }
-        else {
+        }catch (NullPointerException e){
             handleNoAccess();
         }
-
     }
 }
