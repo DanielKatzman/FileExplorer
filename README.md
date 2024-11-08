@@ -1,16 +1,73 @@
-# Simple Recursive File Explorer
 
-This is a simple recursive file explorer built in Java. The program recursively explores directories starting from a specified root folder and lists all the files and directories found within it. The output includes clear visual indicators to represent when the program is entering and exiting directories using custom arrow symbols (`↳` for entering and `↲` for exiting).
+# Simple File Explorer
 
-## Features - Recursively explores directories and subdirectories. - Lists all files and directories, differentiating between them. - Visual indication of entering and exiting directories using arrows (`↳` and `↲`). - Handles empty directories gracefully. - Fully customizable starting directory.
+A simple file explorer application written in Java that allows users to navigate through the file system, view directory contents, and perform various file operations. This project provides a user-friendly interface for exploring files and directories on your computer.
 
-## Requirements - Java 8 or later
+## Table of Contents
+- [Overview](#overview)
+- [Features](#features)
+- [Classes](#classes)
+- [Setup](#setup)
+- [Usage, Contributing, and License](#usage-contributing-and-license)
 
-## Usage
+## Overview
+The Simple File Explorer is designed to help users efficiently browse and manage files on their system. It includes:
+- An abstract class `Explorer` that defines the core functionality for directory navigation.
+- Concrete implementations for displaying directory contents and writing file paths to a text file.
 
-### Running the Program 1. Clone or download the source code. 2. Update the starting directory in the `mainFilePath` variable if necessary: ```java private final static String mainFilePath = "C:\\path\\to\\your\\directory"; ``` 3. Compile the program: ```bash javac SimpleFileExplorer.java ``` 4. Run the program: ```bash java SimpleFileExplorer ```
+## Features
+- Navigate through directories and view files.
+- Handle empty directories gracefully.
+- Return to the previous directory or exit the explorer.
+- Custom GUI for user interaction.
+- Implementation for listing all files starting from a selected folder.
+- Functionality to write all file paths to a text file.
 
-### Example Output
+## Classes
 
-When exploring the directory structure, the program produces output like this:
+### 1. `Explorer` (Abstract Class)
+Defines the essential methods and attributes for file exploration. This class serves as the base for specific explorer implementations.
 
+- **Attributes**:
+    - `File currentDirectory`: The currently selected directory.
+    - `int depth`: The depth of exploration, indicating how deep the explorer can go in the directory tree.
+
+- **Methods**:
+    - `loop(File currentFile)`: Abstract method for looping through files and directories.
+    - `handleEmptyDirectory(File currentFile)`: Handles scenarios when the directory is empty.
+    - `handleDirectory(File currentFile)`: Abstract method for processing a directory.
+    - `handleReturn(File currentFile)`: Handles user navigation choices.
+
+### 2. `FileExplorer_2_0`
+Implements the functionality to explore directories through a graphical interface.
+
+- **Methods**:
+    - `initiate()`: Starts the exploration from system root directories.
+    - `loop(File currentFile)`: Manages directory exploration.
+    - `handleDirectory(File currentFile)`: Displays the contents of accessible subdirectories.
+
+### 3. Additional Implementations
+Additional classes extend the `Explorer` class to provide functionality for:
+- Displaying all files within a selected directory.
+- Writing file paths to a text file.
+
+## Setup
+
+To run this project, ensure you have:
+1. **Java JDK 8 or higher** installed.
+2. **Clone the repository**:
+   ```bash
+   git clone https://github.com/DanielKatzman/SimpleFileExplorer
+   cd SimpleFileExplorer
+   ```
+3. **Build the project** using your preferred IDE or by compiling directly in the terminal.
+
+## Usage, Contributing, and License
+
+1. **Run the Main Program**: Start the application to launch the file explorer GUI.
+2. **Navigate Directories**: Follow the prompts in the GUI to select directories and view their contents.
+3. **Choose Options**: Use the options presented in the GUI to navigate back, select files, or exit the application.
+
+Contributions are welcome! If you have suggestions or improvements, please fork the repository, make changes, and submit a pull request.
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
