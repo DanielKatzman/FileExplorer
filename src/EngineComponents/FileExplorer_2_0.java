@@ -62,7 +62,7 @@ public class FileExplorer_2_0 extends Explorer{
     }
 
     protected void handleDirectory(File currentFile) throws IOException {
-        if(currentFile.exists() && currentFile.isDirectory()) {
+        if(currentFile.exists()) {
             File[] files = currentFile.listFiles();
             File[] filteredFiles = Arrays.stream(files)
                     .filter(File::isDirectory)
