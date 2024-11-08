@@ -9,6 +9,9 @@ import java.util.Optional;
 import java.util.Scanner;
 
 public class Gui {
+    public static final String RESET = "\033[0m";
+    public static final String BLUE = "\033[0;34m";
+    public static final String GREEN = "\033[0;32m";
     private static final char arrowIn = '↳';
     private static final char arrowOut = '↲';
     private static EngineManager engine = new EngineManager();
@@ -38,11 +41,15 @@ public class Gui {
 
 
     private static void menu(){
-        System.out.println("-------------File Explorer-------------");
-        System.out.println("1. Show all files");
-        System.out.println("2. File Explorer");
-        System.out.println("3. Write To Text");
-        System.out.println("0. Exit Program");
+        System.out.println(BLUE + "╔══════════════════════════════════╗" + RESET);
+        System.out.println(GREEN + "║         Simple File Explorer     ║" + RESET);
+        System.out.println(BLUE + "╠══════════════════════════════════╣");
+        System.out.println("║ 1. Show all files                ║");
+        System.out.println("║ 2. File Explorer                 ║");
+        System.out.println("║ 3. Write To Text                 ║");
+        System.out.println("║ 0. Exit Program                  ║");
+        System.out.println("╚══════════════════════════════════╝" + RESET);
+        System.out.print("Select an option: ");
     }
 
     private static void printSpaces(int insideLoop){
