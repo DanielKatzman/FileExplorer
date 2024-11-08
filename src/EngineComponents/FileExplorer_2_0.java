@@ -68,8 +68,6 @@ public class FileExplorer_2_0 extends Explorer{
                 File[] filteredFiles = Arrays.stream(files)
                         .filter(File::isDirectory)
                         .filter(File::canRead)
-                        .filter(file -> !file.isHidden())
-                        .filter(File::isAbsolute)
                         .toArray(File[]::new);
 
                 if(filteredFiles.length == 0){
