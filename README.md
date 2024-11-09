@@ -54,7 +54,7 @@ Additional classes extend the `Explorer` class to provide functionality for:
 ## Setup
 
 To run this project, ensure you have:
-1. **Java JDK 8 or higher** installed.
+1. **Java JDK 17 or higher** installed.
 2. **Clone the repository**:
    ```bash
    git clone https://github.com/DanielKatzman/SimpleFileExplorer
