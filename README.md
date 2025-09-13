@@ -1,5 +1,5 @@
 
-# Simple File Explorer
+# File Explorer
 
 A simple file explorer application written in Java that allows users to navigate through the file system, view directory contents, and perform various file operations. This project provides a user-friendly interface for exploring files and directories on your computer.
 
