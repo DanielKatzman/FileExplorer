@@ -57,7 +57,7 @@ To run this project, ensure you have:
 1. **Java JDK 17 or higher** installed.
 2. **Clone the repository**:
    ```bash
-   git clone https://github.com/DanielKatzman/SimpleFileExplorer
+   git clone https://github.com/DanielKatzman/FileExplorer
    cd SimpleFileExplorer
    ```
 3. **Build the project** using your preferred IDE or by compiling directly in the terminal.
